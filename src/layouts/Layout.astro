@@ -1,0 +1,88 @@
+---
+import '../styles/global.css';
+import config from '../config.json';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = config.tagline } = Astro.props;
+const siteTitle = title ? `${title} | ${config.name}` : `${config.name} | ${config.tagline}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO -->
+		<title>{siteTitle}</title>
+		<meta name="description" content={description} />
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+		
+		<style>
+			body {
+				font-family: 'Inter', sans-serif;
+			}
+			h1, h2, h3, h4, h5, h6, .font-display {
+				font-family: 'Outfit', sans-serif;
+			}
+		</style>
+	</head>
+	<body class="bg-[#FFFFFF] text-[#1A1A1A] antialiased min-h-screen flex flex-col selection:bg-neutral-100 selection:text-neutral-900">
+		<!-- Header Navbar -->
+		<header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 transition-colors duration-300">
+			<nav class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+				<!-- Logo -->
+				<a href="/" class="text-sm font-semibold tracking-[0.2em] font-display uppercase hover:opacity-60 transition-opacity duration-300" id="site-logo">
+					{config.logo}
+				</a>
+				
+				<!-- Nav Links -->
+				<div class="flex items-center space-x-8 md:space-x-12">
+					<a href="/projects" class="text-xs font-medium tracking-[0.15em] uppercase hover:opacity-50 transition-opacity duration-300 py-1" id="nav-projects">
+						Projects
+					</a>
+					<a href="/about" class="text-xs font-medium tracking-[0.15em] uppercase hover:opacity-50 transition-opacity duration-300 py-1" id="nav-about">
+						About
+					</a>
+				</div>
+			</nav>
+		</header>
+
+		<!-- Main Content Area -->
+		<main class="flex-grow">
+			<slot />
+		</main>
+
+		<!-- Global Footer -->
+		<footer class="bg-white py-16 px-6 md:px-12 mt-auto">
+			<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-t border-neutral-100 pt-12">
+				<div class="space-y-2">
+					<p class="text-xs tracking-[0.15em] uppercase font-semibold">{config.name}</p>
+					<p class="text-xs text-neutral-400 font-light">&copy; {new Date().getFullYear()} {config.name}. All rights reserved.</p>
+				</div>
+				<div class="flex flex-wrap gap-6 md:gap-8">
+					{config.socials.map((social) => (
+						<a 
+							href={social.url} 
+							target="_blank" 
+							rel="noopener noreferrer" 
+							class="text-xs tracking-wider text-neutral-500 hover:text-[#1A1A1A] transition-colors duration-300"
+						>
+							{social.name}
+						</a>
+					))}
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
