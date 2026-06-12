@@ -1,17 +1,135 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
+const featuredProjects = (await getCollection('projects')).filter(
+  (project) => project.data.featured
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- Hero Slider -->
+  <div class="relative w-full h-screen overflow-hidden bg-neutral-950 text-white" id="hero-slider">
+    {featuredProjects.map((project, index) => (
+      <div 
+        class="absolute inset-0 w-full h-full transition-all duration-1000 ease-in-out opacity-0 z-0 select-none pointer-events-none slider-slide"
+        data-index={index}
+      >
+        <a href={`/projects/${project.id}`} class="block w-full h-full cursor-pointer pointer-events-auto">
+          <img 
+            src={project.data.cover} 
+            alt={project.data.title} 
+            class="w-full h-full object-cover transition-transform duration-[8000ms] ease-out scale-105"
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          <!-- Cover overlay to make text more readable -->
+          <div class="absolute inset-0 bg-black/30 transition-opacity duration-1000"></div>
+        </a>
+
+        <!-- Slide Content Info -->
+        <div class="absolute bottom-28 left-6 md:left-12 z-20 max-w-2xl select-text">
+          <p class="text-xs tracking-[0.2em] uppercase text-neutral-300 font-light mb-2">{project.data.category} — {project.data.year}</p>
+          <a href={`/projects/${project.id}`} class="group flex items-baseline gap-4 pointer-events-auto">
+            <h2 class="text-3xl md:text-5xl font-light tracking-tight font-display hover:opacity-85 transition-opacity">
+              {project.data.title}
+            </h2>
+          </a>
+        </div>
+      </div>
+    ))}
+
+    <!-- Navigation Arrows -->
+    <button 
+      id="prev-btn" 
+      class="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 z-30 p-2 hover:opacity-50 transition-opacity focus:outline-none cursor-pointer text-white"
+      aria-label="Previous slide"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8 md:w-10 md:h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+    <button 
+      id="next-btn" 
+      class="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-30 p-2 hover:opacity-50 transition-opacity focus:outline-none cursor-pointer text-white"
+      aria-label="Next slide"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8 md:w-10 md:h-10">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+
+    <!-- Slide Indicator (Counter) -->
+    <div class="absolute bottom-28 right-6 md:right-12 z-20 text-xs font-mono tracking-widest text-neutral-300">
+      <span id="current-slide-num">01</span> / <span id="total-slides-num">{String(featuredProjects.length).padStart(2, '0')}</span>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Slider Logic
+  const slides = document.querySelectorAll('.slider-slide');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const currentNumEl = document.getElementById('current-slide-num');
+
+  if (slides.length > 0) {
+    let currentIdx = 0;
+    const total = slides.length;
+
+    function showSlide(index: number) {
+      slides.forEach((slide, i) => {
+        const img = slide.querySelector('img');
+        if (i === index) {
+          slide.classList.remove('opacity-0', 'z-0', 'pointer-events-none');
+          slide.classList.add('opacity-100', 'z-10');
+          if (img) {
+            img.classList.remove('scale-105');
+            img.classList.add('scale-100');
+          }
+        } else {
+          slide.classList.remove('opacity-100', 'z-10');
+          slide.classList.add('opacity-0', 'z-0', 'pointer-events-none');
+          if (img) {
+            img.classList.remove('scale-100');
+            img.classList.add('scale-105');
+          }
+        }
+      });
+      if (currentNumEl) {
+        currentNumEl.textContent = String(index + 1).padStart(2, '0');
+      }
+    }
+
+    // Initialize first slide
+    showSlide(currentIdx);
+
+    // Event Listeners
+    prevBtn?.addEventListener('click', () => {
+      currentIdx = (currentIdx - 1 + total) % total;
+      showSlide(currentIdx);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      currentIdx = (currentIdx + 1) % total;
+      showSlide(currentIdx);
+    });
+
+    // Auto-advance every 7 seconds
+    let interval = setInterval(() => {
+      currentIdx = (currentIdx + 1) % total;
+      showSlide(currentIdx);
+    }, 7000);
+
+    // Reset interval on button click
+    const resetInterval = () => {
+      clearInterval(interval);
+      interval = setInterval(() => {
+        currentIdx = (currentIdx + 1) % total;
+        showSlide(currentIdx);
+      }, 7000);
+    };
+
+    prevBtn?.addEventListener('click', resetInterval);
+    nextBtn?.addEventListener('click', resetInterval);
+  }
+</script>
