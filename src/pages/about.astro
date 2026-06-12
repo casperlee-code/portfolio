@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro';
+import config from '../config.json';
+---
+
+<Layout title="About" description={`About ${config.name} — ${config.about.title}`}>
+  <div class="max-w-5xl mx-auto pt-36 pb-24 px-6 md:px-12 min-h-screen flex flex-col md:flex-row gap-12 md:gap-20">
+    
+    <!-- Left Column: Biography -->
+    <div class="md:w-3/5 space-y-8">
+      <div>
+        <h1 class="text-xs tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-3">About</h1>
+        <h2 class="text-3xl md:text-4xl font-extralight tracking-tight font-display text-neutral-900 leading-tight">
+          {config.about.title}
+        </h2>
+      </div>
+      <div class="text-sm font-light leading-relaxed text-neutral-600 space-y-6">
+        <p>
+          {config.about.description}
+        </p>
+      </div>
+    </div>
+
+    <!-- Right Column: Contact, Socials, CV -->
+    <div class="md:w-2/5 space-y-12 md:border-l md:border-neutral-100 md:pl-12">
+      <!-- Contact Info -->
+      <div class="space-y-4">
+        <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold">Contact</h3>
+        <div class="space-y-2 text-sm font-light text-neutral-800">
+          <p>
+            <span class="text-neutral-400 block text-[10px] tracking-widest uppercase mb-1">Email</span>
+            <a href={`mailto:${config.about.email}`} class="hover:text-neutral-500 transition-colors duration-300">
+              {config.about.email}
+            </a>
+          </p>
+          <p class="pt-2">
+            <span class="text-neutral-400 block text-[10px] tracking-widest uppercase mb-1">Phone</span>
+            <a href={`tel:${config.about.phone}`} class="hover:text-neutral-500 transition-colors duration-300">
+              {config.about.phone}
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Socials -->
+      <div class="space-y-4">
+        <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold">Socials</h3>
+        <div class="flex flex-col gap-2">
+          {config.socials.map((social) => (
+            <a 
+              href={social.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="text-sm font-light text-neutral-800 hover:text-neutral-500 transition-colors duration-300 w-fit"
+            >
+              {social.name}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- CV Download -->
+      <div class="pt-4">
+        <a 
+          href={config.about.cvUrl} 
+          download
+          class="inline-block border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white text-[10px] tracking-[0.25em] uppercase px-8 py-4 font-semibold transition-all duration-300 rounded-none w-full text-center md:w-auto"
+        >
+          Download CV
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</Layout>
