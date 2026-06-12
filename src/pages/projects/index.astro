@@ -1,0 +1,124 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+// Sort by year descending
+const sortedProjects = projects.sort((a, b) => Number(b.data.year) - Number(a.data.year));
+
+const categories = [
+  'All',
+  'School Project',
+  'Internship Project',
+  'Other Experience',
+  'Sketch & Idea'
+];
+---
+
+<Layout title="Projects">
+  <div class="pt-32 pb-24 max-w-7xl mx-auto px-6 md:px-12 min-h-screen">
+    <!-- Header -->
+    <div class="mb-16">
+      <h1 class="text-xs tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-4">Portfolio</h1>
+      <h2 class="text-4xl md:text-5xl font-extralight tracking-tight font-display">Selected Works</h2>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-x-8 gap-y-4 border-b border-neutral-100 pb-6 mb-12">
+      {categories.map((cat, idx) => (
+        <button
+          class={`filter-btn text-xs tracking-[0.15em] uppercase border-b-2 py-2 transition-all duration-300 cursor-pointer ${
+            idx === 0 
+              ? 'border-neutral-900 text-neutral-900 font-semibold' 
+              : 'border-transparent text-neutral-400 hover:text-neutral-900'
+          }`}
+          data-filter={cat.toLowerCase().replace(/\s+/g, '-')}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 transition-all duration-500" id="projects-grid">
+      {sortedProjects.map((project) => (
+        <div
+          class="project-grid-item relative aspect-square overflow-hidden bg-neutral-50 group transition-all duration-500 ease-out origin-center"
+          data-category={project.data.category.toLowerCase().replace(/\s+/g, '-')}
+        >
+          <a href={`/projects/${project.id}`} class="block w-full h-full">
+            <img
+              src={project.data.cover}
+              alt={project.data.title}
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
+            />
+            <!-- Overlay on Hover -->
+            <div class="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-8 text-center">
+              <span class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-light mb-2">
+                {project.data.category}
+              </span>
+              <h3 class="text-lg font-light tracking-tight font-display text-neutral-900 mb-1 px-4 leading-snug">
+                {project.data.title}
+              </h3>
+              <span class="text-xs font-mono font-light text-neutral-400">
+                {project.data.year}
+              </span>
+            </div>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.project-grid-item');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      // Update active state of buttons
+      buttons.forEach((b) => {
+        b.classList.remove('border-neutral-900', 'text-neutral-900', 'font-semibold');
+        b.classList.add('border-transparent', 'text-neutral-400');
+      });
+      btn.classList.remove('border-transparent', 'text-neutral-400');
+      btn.classList.add('border-neutral-900', 'text-neutral-900', 'font-semibold');
+
+      // Filter grid items
+      items.forEach((item) => {
+        const itemCategory = item.getAttribute('data-category');
+        const gridItem = item as HTMLElement;
+
+        if (filter === 'all' || itemCategory === filter) {
+          // If hidden, restore display and animate
+          if (gridItem.classList.contains('hidden')) {
+            gridItem.classList.remove('hidden');
+            // Allow a frame for display to register before adding opacity/scale
+            requestAnimationFrame(() => {
+              gridItem.classList.remove('opacity-0', 'scale-95');
+              gridItem.classList.add('opacity-100', 'scale-100');
+            });
+          }
+        } else {
+          // Add opacity/scale and hide after transition
+          gridItem.classList.add('opacity-0', 'scale-95');
+          gridItem.classList.remove('opacity-100', 'scale-100');
+          
+          const handleTransitionEnd = (e: TransitionEvent) => {
+            if (e.propertyName === 'opacity' || e.propertyName === 'transform') {
+              if (gridItem.classList.contains('opacity-0')) {
+                gridItem.classList.add('hidden');
+              }
+              gridItem.removeEventListener('transitionend', handleTransitionEnd);
+            }
+          };
+          gridItem.addEventListener('transitionend', handleTransitionEnd);
+        }
+      });
+    });
+  });
+</script>
