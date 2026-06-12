@@ -1,0 +1,26 @@
+{
+  "name": "Alex Chen",
+  "logo": "ALEX CHEN",
+  "tagline": "Architect & Spatial Designer",
+  "socials": [
+    {
+      "name": "Instagram",
+      "url": "https://instagram.com"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:alex.chen@example.com"
+    }
+  ],
+  "about": {
+    "title": "Designing Silence and Light",
+    "description": "Alex Chen is an architect and spatial designer whose practice focuses on the intersection of minimalism, light, and context. By reducing forms to their essential elements, he creates quiet spaces that respond to the landscape and the passage of time. His work spans residences, public pavilions, and experimental installations, emphasizing local materials and tectonic clarity.",
+    "email": "alex.chen@example.com",
+    "phone": "+886 912 345 678",
+    "cvUrl": "/cv_alex_chen.pdf"
+  }
+}
