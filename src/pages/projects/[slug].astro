@@ -22,14 +22,19 @@ const { Content } = await render(project);
       id="gallery-container"
       class="w-full md:w-2/3 h-[60vh] md:h-screen overflow-y-auto hide-scrollbar pt-24 pb-12 px-4 md:px-12 flex flex-col gap-6 md:gap-10 transition-all duration-500 ease-in-out border-r border-neutral-50"
     >
-      {project.data.images.map((img, idx) => (
-        <img 
-          src={img} 
-          alt={`${project.data.title} - Image ${idx + 1}`} 
-          class="w-full object-cover aspect-[16/10] md:aspect-auto hover:opacity-95 transition-opacity duration-300 bg-neutral-50"
-          loading={idx === 0 ? "eager" : "lazy"}
-        />
-      ))}
+      {project.data.images.map((img, idx) => {
+        const coverPath = project.data.cover;
+        const folderPath = coverPath.substring(0, coverPath.lastIndexOf('/'));
+        const srcPath = img.startsWith('/') ? img : `${folderPath}/${img}`;
+        return (
+          <img 
+            src={srcPath} 
+            alt={`${project.data.title} - Image ${idx + 1}`} 
+            class="w-full object-cover aspect-[16/10] md:aspect-auto hover:opacity-95 transition-opacity duration-300 bg-neutral-50"
+            loading={idx === 0 ? "eager" : "lazy"}
+          />
+        );
+      })}
     </div>
 
     <!-- Right: Text Panel -->

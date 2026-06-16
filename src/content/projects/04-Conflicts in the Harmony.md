@@ -4,9 +4,12 @@ year: 2024
 category: "School Project"
 cover: "/images/project-04/cover.jpg"
 images:
-  - "/images/project-04/cover.jpg"
-  - "/images/project-04/image-1.jpg"
-  - "/images/project-04/image-2.jpg"
+  - "cover.jpg"
+  - "image-1.jpg"
+  - "image-2.jpg"
+  - "image-3.jpg"
+  - "image-4.jpg"
+  - "image-5.jpg"
 featured: true
 ---
 
