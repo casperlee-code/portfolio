@@ -4,11 +4,11 @@ year: 2024
 category: "Other Experience"
 cover: "/images/project-03/cover.jpg"
 images:
-  - "cover.jpg"
-  - "image-1.jpg"
-  - "image-2.jpg"
-  - "image-3.jpg"
-  - "image-4.jpg"
+  - "/images/project-03/cover.jpg"
+  - "/images/project-03/image-1.jpg"
+  - "/images/project-03/image-2.jpg"
+  - "/images/project-03/image-3.jpg"
+  - "/images/project-03/image-4.jpg"
 featured: true
 ---
 

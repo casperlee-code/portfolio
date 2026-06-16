@@ -4,13 +4,13 @@ year: 2025
 category: "School Project"
 cover: "/images/project-02/cover.jpg"
 images:
-  - "cover.jpg"
-  - "image-1.jpg"
-  - "image-2.jpg"
-  - "image-3.jpg"
-  - "image-4.jpg"
-  - "image-5.jpg"
-  - "image-6.jpg"
+  - "/images/project-02/cover.jpg"
+  - "/images/project-02/image-1.jpg"
+  - "/images/project-02/image-2.jpg"
+  - "/images/project-02/image-3.jpg"
+  - "/images/project-02/image-4.jpg"
+  - "/images/project-02/image-5.jpg"
+  - "/images/project-02/image-6.jpg"
 featured: true
 ---
 
