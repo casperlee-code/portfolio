@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import config from '../config.json';
+
+const getAssetPath = (path: string) => path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
 ---
 
 <Layout title="About" description={`About ${config.name} — ${config.about.title}`}>
@@ -62,7 +64,7 @@ import config from '../config.json';
       <!-- CV Download -->
       <div class="pt-4">
         <a 
-          href={config.about.cvUrl} 
+          href={getAssetPath(config.about.cvUrl)} 
           download
           class="inline-block border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white text-[10px] tracking-[0.25em] uppercase px-8 py-4 font-semibold transition-all duration-300 rounded-none w-full text-center md:w-auto"
         >

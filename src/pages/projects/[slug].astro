@@ -12,6 +12,8 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+
+const getAssetPath = (path: string) => path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
 ---
 
 <Layout title={project.data.title} description={`${project.data.category} — ${project.data.year}`}>
@@ -25,7 +27,8 @@ const { Content } = await render(project);
       {project.data.images.map((img, idx) => {
         const coverPath = project.data.cover;
         const folderPath = coverPath.substring(0, coverPath.lastIndexOf('/'));
-        const srcPath = img.startsWith('/') ? img : `${folderPath}/${img}`;
+        const rawSrcPath = img.startsWith('/') ? img : `${folderPath}/${img}`;
+        const srcPath = getAssetPath(rawSrcPath);
         return (
           <img 
             src={srcPath} 
@@ -71,7 +74,7 @@ const { Content } = await render(project);
       <!-- Back Button -->
       <div class="mt-auto pt-12">
         <a 
-          href="/projects" 
+          href={`${import.meta.env.BASE_URL}projects`} 
           class="inline-flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-neutral-400 hover:text-[#1A1A1A] transition-colors duration-300"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
