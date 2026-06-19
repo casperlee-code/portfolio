@@ -2,13 +2,13 @@
 title: "2026 FCU Beaux-Arts Ball 評分與控台系統"
 year: 2026
 category: "Computational Project"
-cover: "/images/project-beaux-arts/cover.jpg"
+cover: "/images/project-05/cover.png"
 images:
-  - "/images/project-beaux-arts/cover.jpg"
-  - "/images/project-beaux-arts/process-01.jpg"
-  - "/images/project-beaux-arts/process-02.jpg"
-  - "/images/project-beaux-arts/process-03.jpg"
-  - "/images/project-beaux-arts/process-04.jpg"
+  - "/images/project-05/cover.png"
+  - "/images/project-05/process-01.jpg"
+  - "/images/project-05/process-02.jpg"
+  - "/images/project-05/process-03.jpg"
+  - "/images/project-05/process-04.jpg"
 featured: true
 tags:
   - Firebase
@@ -118,7 +118,7 @@ endpoints:
 
 **修復**：
 1. 修正 `google-sheets-script.js` 第 160 行 `setBackground()` 傳入無效 RGB 字串導致服務崩潰的錯誤。
-2. 重構 `admin.html` API 回傳判定邏輯，嚴格要求 `status === 'success'` 才判定成功；遭遇 CORS 阻擋或 API 未配置時，彈出紅色警告提示管理員檢查 Web App 部署設定。
+2. 重構 `admin.html` API 回傳判定邏輯，推斷是否真的呼叫成功；若遭遇錯誤或 API 未配置，彈出紅色警告提示管理員檢查 Web App 部署設定。
 
 ---
 

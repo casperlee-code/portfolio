@@ -2,9 +2,9 @@
 title: "個人作品集網站"
 year: 2026
 category: "Computational Project"
-cover: "/images/project-portfolio-web/cover.jpg"
+cover: "/images/project-06/cover.jpg"
 images:
-  - "/images/project-portfolio-web/cover.jpg"
+  - "/images/project-06/cover.jpg"
 featured: true
 tags:
   - Astro
