@@ -1,11 +1,11 @@
 {
-  "name": "Alex Chen",
-  "logo": "ALEX CHEN",
-  "tagline": "Architect & Spatial Designer",
+  "name": "Casper Lee",
+  "logo": "CASPER LEE",
+  "tagline": "Architecture Student & Spatial Explorer",
   "socials": [
     {
       "name": "Instagram",
-      "url": "https://instagram.com"
+      "url": "https://instagram.com/tastingwider"
     },
     {
       "name": "LinkedIn",
@@ -13,14 +13,14 @@
     },
     {
       "name": "Email",
-      "url": "mailto:alex.chen@example.com"
+      "url": "mailto:Casper.lee.family@gmail.com"
     }
   ],
   "about": {
-    "title": "Designing Silence and Light",
-    "description": "Alex Chen is an architect and spatial designer whose practice focuses on the intersection of minimalism, light, and context. By reducing forms to their essential elements, he creates quiet spaces that respond to the landscape and the passage of time. His work spans residences, public pavilions, and experimental installations, emphasizing local materials and tectonic clarity.",
-    "email": "alex.chen@example.com",
-    "phone": "+886 912 345 678",
-    "cvUrl": "/cv_alex_chen.pdf"
+    "title": "Vision, Context, and Tectonics",
+    "description": "Hello, I'm Casper (Ping-Kuan) Lee, a passionate architecture student from Taiwan. My architectural practice focuses on 'Context' and 'Tectonics', balancing sensibility in ideation with rationality in execution. I have explored architecture across various scales—from curation at the AA Visiting School to professional internships at STOA Architects in the U.S., as well as Harmony Design and AS Structure in Taiwan. I constantly challenge my potential to turn the extraordinary into everyday spaces, broadening my architectural understanding through diverse cultures and continuous exploration.",
+    "email": "Casper.lee.family@gmail.com",
+    "phone": "+886 905 508 367",
+    "cvUrl": "/my_cv.pdf"
   }
 }
