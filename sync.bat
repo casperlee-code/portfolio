@@ -1,6 +1,12 @@
 @echo off
 :: Set character encoding to UTF-8 to support Chinese text in prompt
 chcp 65001 > nul
+
+:: Add local .node directory to PATH if it exists
+if exist "%~dp0.node" (
+    set "PATH=%~dp0.node;%PATH%"
+)
+
 echo ==========================================
 echo       Casper Portfolio Sync Tool
 echo ==========================================
