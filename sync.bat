@@ -5,21 +5,33 @@ echo ==========================================
 echo       Casper Portfolio Sync Tool
 echo ==========================================
 echo.
-echo 1. Staging all changes (git add .)...
+echo [1/4] Staging and committing source code...
 git add .
-echo.
-echo 2. Enter a description of your updates (Commit Message).
-echo (If you leave it blank, it will default to: "update portfolio content")
-set /p commit_msg="Description: "
+set /p commit_msg="Enter update description (or Enter for default): "
 if "%commit_msg%"=="" set commit_msg=update portfolio content
-echo.
-echo 3. Committing changes...
 git commit -m "%commit_msg%"
+
 echo.
-echo 4. Pushing changes to GitHub...
-git push origin HEAD
+echo [2/4] Pushing source code to GitHub (master branch)...
+git push origin HEAD:master
+
+echo.
+echo [3/4] Building the website (npm run build)...
+call npm run build
+
+echo.
+echo [4/4] Deploying static website to GitHub Pages (gh-pages branch)...
+cd dist
+git init
+git add .
+git commit -m "Deploy: rebuild portfolio"
+git remote add origin https://github.com/casperlee-code/portfolio.git
+git push origin master:gh-pages --force
+cd ..
+
 echo.
 echo ==========================================
 echo  Sync completed! Your website is updated.
+echo  Live site: https://casperlee-code.github.io/portfolio/
 echo ==========================================
 pause
