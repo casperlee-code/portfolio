@@ -22,11 +22,12 @@ call npm run build
 echo.
 echo [4/4] Deploying static website to GitHub Pages (gh-pages branch)...
 cd dist
+if exist .git rmdir /s /q .git
 git init
 git add .
 git commit -m "Deploy: rebuild portfolio"
 git remote add origin https://github.com/casperlee-code/portfolio.git
-git push origin master:gh-pages --force
+git push origin HEAD:gh-pages --force
 cd ..
 
 echo.
