@@ -10,6 +10,7 @@ const projects = defineCollection({
       'School Project',
       'Internship Project',
       'Other Experience',
+      'Computational Project',
       'Sketch & Idea'
     ]),
     cover: z.string(),
