@@ -24,6 +24,8 @@ echo [4/4] Deploying static website to GitHub Pages (gh-pages branch)...
 cd dist
 if exist .git rmdir /s /q .git
 git init
+git config user.name "Casper Lee"
+git config user.email "Casper.lee.family@gmail.com"
 git add .
 git commit -m "Deploy: rebuild portfolio"
 git remote add origin https://github.com/casperlee-code/portfolio.git
