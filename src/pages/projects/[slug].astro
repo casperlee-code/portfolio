@@ -64,7 +64,7 @@ const { Content } = await render(project);
       </div>
 
       <!-- Description / Content -->
-      <div class="text-sm font-light text-neutral-600 leading-relaxed space-y-4 max-w-none">
+      <div class="description-content text-base font-normal text-neutral-600 leading-relaxed space-y-4 max-w-none">
         <Content />
       </div>
 
@@ -102,6 +102,90 @@ const { Content } = await render(project);
   .hide-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Scoped typography for markdown content */
+  .description-content :global(p:first-of-type) {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500;    /* font-medium */
+    color: #262626;      /* text-neutral-800 */
+    line-height: 1.75;
+  }
+  
+  .description-content :global(h2) {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500;    /* font-medium */
+    color: #171717;      /* text-neutral-900 */
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.025em;
+  }
+
+  .description-content :global(h3) {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600;
+    color: #171717;      /* text-neutral-900 */
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .description-content :global(ul) {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 300;     /* font-light */
+  }
+
+  .description-content :global(ol) {
+    list-style-type: decimal;
+    padding-left: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 300;     /* font-light */
+  }
+
+  .description-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .description-content :global(table) {
+    width: 100%;
+    font-size: 0.75rem; /* text-xs */
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-collapse: collapse;
+  }
+
+  .description-content :global(th) {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: #171717;
+  }
+
+  .description-content :global(td) {
+    border-bottom: 1px solid #f5f5f5;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #525252;
+  }
+
+  .description-content :global(hr) {
+    border: 0;
+    border-top: 1px solid #f5f5f5;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .description-content :global(blockquote) {
+    border-left: 2px solid #e5e5e5;
+    padding-left: 1rem;
+    font-style: italic;
+    color: #737373;
   }
 </style>
 
