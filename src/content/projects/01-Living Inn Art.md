@@ -12,7 +12,7 @@ images:
 featured: true
 ---
 
-專案概述
+## 專案概述
 
 "Living Inn art" integrates a community gallery, artist residence, and themed hotel. Its open ground floor faces the Greenway, naturally drawing visitors into the site. The upper floors include artist studios that open as exhibition halls and guest rooms with small workshops for hands-on artistic experiences.
 
