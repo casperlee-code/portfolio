@@ -29,6 +29,10 @@ const { Content } = await render(project);
           alt={`${project.data.title} - Image ${idx + 1}`} 
           class="w-full object-cover aspect-[16/10] md:aspect-auto hover:opacity-95 transition-opacity duration-300 bg-neutral-50"
           loading={idx === 0 ? "eager" : "lazy"}
+          fetchpriority={idx === 0 ? "high" : undefined}
+          format="avif"
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 768px) 100vw, 66vw"
         />
       ))}
     </div>
