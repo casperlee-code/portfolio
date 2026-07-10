@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     year: z.union([z.string(), z.number()]),
     category: z.enum([
@@ -13,8 +13,8 @@ const projects = defineCollection({
       'Computational Project',
       'Sketch & Idea'
     ]),
-    cover: z.string(),
-    images: z.array(z.string()),
+    cover: image(),
+    images: z.array(image()),
     featured: z.boolean()
   })
 });
