@@ -22,6 +22,10 @@ const featuredProjects = (await getCollection('projects')).filter(
             alt={project.data.title} 
             class="w-full h-full object-cover transition-transform duration-[8000ms] ease-out scale-105"
             loading={index === 0 ? "eager" : "lazy"}
+            format="avif"
+            widths={[400, 800, 1200, 1600]}
+            sizes="100vw"
+            fetchpriority={index === 0 ? "high" : undefined}
           />
           <!-- Cover overlay to make text more readable -->
           <div class="absolute inset-0 bg-black/30 transition-opacity duration-1000"></div>
