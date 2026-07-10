@@ -2,15 +2,15 @@
 title: "Flow in the city, Fluid in the solid"
 year: 2025
 category: "School Project"
-cover: "/images/project-02/cover.jpg"
+cover: "../../assets/images/project-02/cover.jpg"
 images:
-  - "/images/project-02/cover.jpg"
-  - "/images/project-02/image-1.jpg"
-  - "/images/project-02/image-2.jpg"
-  - "/images/project-02/image-3.jpg"
-  - "/images/project-02/image-4.jpg"
-  - "/images/project-02/image-5.jpg"
-  - "/images/project-02/image-6.jpg"
+  - "../../assets/images/project-02/cover.jpg"
+  - "../../assets/images/project-02/image-1.jpg"
+  - "../../assets/images/project-02/image-2.jpg"
+  - "../../assets/images/project-02/image-3.jpg"
+  - "../../assets/images/project-02/image-4.jpg"
+  - "../../assets/images/project-02/image-5.jpg"
+  - "../../assets/images/project-02/image-6.jpg"
 featured: true
 ---
 

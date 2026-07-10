@@ -2,14 +2,14 @@
 title: "Conflicts in the Harmony"
 year: 2024
 category: "School Project"
-cover: "/images/project-04/cover.jpg"
+cover: "../../assets/images/project-04/cover.jpg"
 images:
-  - "/images/project-04/cover.jpg"
-  - "/images/project-04/image-1.jpg"
-  - "/images/project-04/image-2.jpg"
-  - "/images/project-04/image-3.jpg"
-  - "/images/project-04/image-4.jpg"
-  - "/images/project-04/image-5.jpg"
+  - "../../assets/images/project-04/cover.jpg"
+  - "../../assets/images/project-04/image-1.jpg"
+  - "../../assets/images/project-04/image-2.jpg"
+  - "../../assets/images/project-04/image-3.jpg"
+  - "../../assets/images/project-04/image-4.jpg"
+  - "../../assets/images/project-04/image-5.jpg"
 featured: true
 ---
 

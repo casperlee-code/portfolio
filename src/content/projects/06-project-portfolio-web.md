@@ -2,9 +2,9 @@
 title: "個人作品集網站"
 year: 2026
 category: "Computational Project"
-cover: "/images/project-06/cover.jpg"
+cover: "../../assets/images/project-06/cover.jpg"
 images:
-  - "/images/project-06/cover.jpg"
+  - "../../assets/images/project-06/cover.jpg"
 featured: true
 tags:
   - Astro
@@ -56,10 +56,11 @@ routes:
 ```
 專案根目錄/
 ├── public/                        # 靜態資源（不需編譯）
-│   ├── my_cv.pdf                  # 個人簡歷 PDF
-│   └── images/                    # 作品照片庫
-│       └── project-01/            # 各作品子資料夾
+│   └── my_cv.pdf                  # 個人簡歷 PDF
 ├── src/                           # 網頁原始碼
+│   ├── assets/                    # 靜態資源（經 Astro 優化）
+│   │   └── images/                # 作品照片庫
+│   │       └── project-01/        # 各作品子資料夾
 │   ├── config.json                # 全站設定檔（姓名、LOGO、聯絡資訊）
 │   ├── content.config.ts          # 資料欄位設定（Frontmatter 格式）
 │   ├── content/projects/          # 作品集資料庫（每個 .md = 一個作品）
@@ -88,7 +89,7 @@ routes:
 
 **Step 1 — 準備相片**
 
-在 `public/images/` 下新建子資料夾（如 `project-05`），將渲染圖、草圖放入。
+在 `src/assets/images/` 下新建子資料夾（如 `project-05`），將渲染圖、草圖放入。
 
 > ⚠️ 圖片必須是真正的 `.jpg`、`.png` 或 `.webp` 格式，檔名使用英文或數字。
 
@@ -103,11 +104,11 @@ year: 2026
 category: "School Project"
 # 僅限以下四種：
 # "School Project" | "Internship Project" | "Other Experience" | "Sketch & Idea"
-cover: "/images/project-05/cover.jpg"
+cover: "../../assets/images/project-05/cover.jpg"
 images:
-  - "/images/project-05/cover.jpg"
-  - "/images/project-05/process-01.jpg"
-  - "/images/project-05/sketch.png"
+  - "../../assets/images/project-05/cover.jpg"
+  - "../../assets/images/project-05/process-01.jpg"
+  - "../../assets/images/project-05/sketch.png"
 featured: true   # 設為 true 才會出現在首頁幻燈片
 ---
 
@@ -152,13 +153,13 @@ featured: true   # 設為 true 才會出現在首頁幻燈片
 
 ## 開發問題記錄與解決方案
 
-### 問題 1：動態詳情頁面的圖片絕對路徑問題
+### 問題 1：圖片優化與載入效能提升（Astro 圖片優化引擎）
 
 | 項目 | 內容 |
 |------|------|
-| **症狀** | 作品詳細頁左側大圖區塊無法載入（破圖） |
-| **原因** | `images` 清單只記錄檔名，瀏覽器以當前 URL 為起點尋找，導致路徑錯誤（404） |
-| **解法** | 將 `images:` 陣列改為從根目錄出發的絕對路徑，如 `/images/project-01/cover.jpg` |
+| **症狀** | 圖片未經過壓縮及格式優化，首頁及專案頁面載入速度慢且不支援 WebP/AVIF 自動轉換 |
+| **原因** | 原本將圖片置於 `public/images/` 僅作為靜態資源讀取，無法被 Astro 的優化引擎存取 |
+| **解法** | 將圖片遷移至 `src/assets/images/`，修改 Content Collections 欄位為 `image()` helper，並在 Markdown 中改用相對路徑（如 `../../assets/images/project-01/cover.jpg`）以啟用內建 `<Image />` 元件優化 |
 
 ### 問題 2：HEIC 檔案格式更名導致的破圖
 

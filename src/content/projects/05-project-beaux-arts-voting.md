@@ -2,13 +2,13 @@
 title: "2026 FCU Beaux-Arts Ball 評分與控台系統"
 year: 2026
 category: "Computational Project"
-cover: "/images/project-05/cover.png"
+cover: "../../assets/images/project-05/cover.png"
 images:
-  - "/images/project-05/cover.png"
-  - "/images/project-05/process-01.jpg"
-  - "/images/project-05/process-02.jpg"
-  - "/images/project-05/process-03.jpg"
-  - "/images/project-05/process-04.jpg"
+  - "../../assets/images/project-05/cover.png"
+  - "../../assets/images/project-05/process-01.jpg"
+  - "../../assets/images/project-05/process-02.jpg"
+  - "../../assets/images/project-05/process-03.jpg"
+  - "../../assets/images/project-05/process-04.jpg"
 featured: true
 tags:
   - Firebase

@@ -2,13 +2,13 @@
 title: "What do you think the nature looks like"
 year: 2024
 category: "Other Experience"
-cover: "/images/project-03/cover.jpg"
+cover: "../../assets/images/project-03/cover.jpg"
 images:
-  - "/images/project-03/cover.jpg"
-  - "/images/project-03/image-1.jpg"
-  - "/images/project-03/image-2.jpg"
-  - "/images/project-03/image-3.jpg"
-  - "/images/project-03/image-4.jpg"
+  - "../../assets/images/project-03/cover.jpg"
+  - "../../assets/images/project-03/image-1.jpg"
+  - "../../assets/images/project-03/image-2.jpg"
+  - "../../assets/images/project-03/image-3.jpg"
+  - "../../assets/images/project-03/image-4.jpg"
 featured: true
 ---
 
