@@ -8,7 +8,6 @@ images:
   - "../../assets/images/project-01/image-1.jpg"
   - "../../assets/images/project-01/image-2.jpg"
   - "../../assets/images/project-01/image-3.jpg"
-  - "../../assets/images/project-01/image-4.jpg"
   - "../../assets/images/project-01/image-5.jpg"
 featured: true
 ---
