@@ -16,11 +16,15 @@ featured: true
 
 "What do you think the nature looks like?" This question emerged from our observations along Taiwan's east coast, spanning Yilan and Hualian. In this relatively fragile yet pristine region, we sought the connection between the city and the ocean. Through film and curation, we guide the audience to reflect on the relationship between civilization and nature.
 
+<div class="project-meta">
+
 Program: AA Visiting School (Urbanity from the ocean)
 
 Site Location: Yilan & Hualian, Taiwan
 
 Keyword: Field Research / Film Documentary / Curation
+
+</div>
 
 Curatorial Statement
 

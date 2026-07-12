@@ -112,6 +112,15 @@ const { Content } = await render(project);
     line-height: 1.75;
   }
   
+  .description-content :global(.project-meta),
+  .description-content :global(.project-meta p) {
+    font-size: 1rem;     /* text-base */
+    font-weight: 500;    /* font-medium */
+    font-style: italic;  /* italic */
+    color: #262626;      /* text-neutral-800 */
+    line-height: 1.75;
+  }
+  
   .description-content :global(h2) {
     font-size: 1.125rem; /* text-lg */
     font-weight: 500;    /* font-medium */

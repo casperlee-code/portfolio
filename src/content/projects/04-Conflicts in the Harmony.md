@@ -17,6 +17,8 @@ featured: true
 
 "Public restrooms and parks represent the most liberated corners of this city. People enter freely to rest, chat, and unwind before moving on. I have always felt that Taiwan, teeming with vitality, may not be 'beautiful' in the conventional sense, but it is undoubtedly interesting — all compressed into the fabric of our daily existence."
 
+<div class="project-meta">
+
 Site Location: Xitun District, Taichung
 
 Keyword: The contradictions of Taiwan's urban streetscape
@@ -24,6 +26,8 @@ Keyword: The contradictions of Taiwan's urban streetscape
 Tools: Rhino, AutoCAD, Photoshop, Illustrator
 
 設計理念：Common city scene for Taiwan
+
+</div>
 
 Public toilets and parks are the freest corners of a city. People freely enter parks to rest, chat, and relax, and then leave.
 

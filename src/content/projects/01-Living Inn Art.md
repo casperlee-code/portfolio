@@ -16,11 +16,17 @@ featured: true
 
 "Living Inn art" integrates a community gallery, artist residence, and themed hotel. Its open ground floor faces the Greenway, naturally drawing visitors into the site. The upper floors include artist studios that open as exhibition halls and guest rooms with small workshops for hands-on artistic experiences.
 
+<div class="project-meta">
+
 Site Location: West District, Taichung
+
 Keyword: Inclusive Arts Village
+
 Tools: Revit, AutoCAD, D5 render, Photoshop, Illustrator
 
 設計理念：Reversing the Perception of Art
+
+</div>
 
 In our daily lives, has the connection between art and life become too distant?
 Art is originally a translation of life, expressing the artist's interpretations shaped by different life experiences. Yet, art often feels profound, difficult, and isolated as an experience. This makes me wonder: could spatial design help make art a natural part of everyday life and create accessible spaces for artistic exchange?

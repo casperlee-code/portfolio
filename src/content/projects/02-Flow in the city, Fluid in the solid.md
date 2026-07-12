@@ -18,6 +18,8 @@ featured: true
 
 "Flow in the City" provides urban residents with an agri-food space where they can engage through education, consumption, and participation. Located within an urban redevelopment zone, the design's fluid spatial quality offers users a sensory experience that transcends the typical city atmosphere.
 
+<div class="project-meta">
+
 Site Location: Beitun District, Taichung
 
 Keyword: Curve, Tensile structure, Agri-food space
@@ -25,6 +27,8 @@ Keyword: Curve, Tensile structure, Agri-food space
 Tools: Rhino, Grasshopper, AutoCAD, D5 render, Photoshop, Illustrator
 
 設計理念：Leaving a light, flowing presence in the city
+
+</div>
 
 Seeking to reclaim a spatial experience where landscape and architecture breathe as one. I hope to create a fluid and free space within this highly planned redevelopment zone.
 
