@@ -15,7 +15,9 @@ const projects = defineCollection({
     ]),
     cover: image(),
     images: z.array(image()),
-    featured: z.boolean()
+    featured: z.boolean(),
+    pdf: z.string().optional(),
+    password: z.string().optional()
   })
 });
 
