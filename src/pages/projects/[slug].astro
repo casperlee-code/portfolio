@@ -16,7 +16,49 @@ const { Content } = await render(project);
 ---
 
 <Layout title={project.data.title} description={`${project.data.category} — ${project.data.year}`}>
-  <div class="relative w-full min-h-screen flex flex-col md:flex-row bg-white overflow-x-hidden">
+  <!-- Hidden data for password protection -->
+  <input type="hidden" id="project-id-data" value={project.id} />
+  <input type="hidden" id="project-password-data" value={project.data.password || ""} />
+
+  <!-- Glassmorphism Password Protection Modal -->
+  {project.data.password && (
+    <div 
+      id="password-overlay" 
+      class="fixed inset-0 z-50 flex items-center justify-center bg-white/75 backdrop-blur-md transition-all duration-500 ease-in-out"
+    >
+      <div class="max-w-md w-full mx-6 bg-white border border-neutral-100 p-8 md:p-10 shadow-2xl rounded-none flex flex-col text-center">
+        <span class="text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-4 block">
+          Protected Project
+        </span>
+        <h2 class="text-xl md:text-2xl font-light tracking-tight font-display text-neutral-900 mb-6">
+          請輸入密碼以查看實習專案
+        </h2>
+        <form id="password-form" class="space-y-4">
+          <input 
+            type="password" 
+            id="project-password-input" 
+            placeholder="Password" 
+            class="w-full border-b border-neutral-300 py-3 px-1 text-sm text-neutral-900 focus:outline-none focus:border-neutral-900 bg-transparent text-center font-mono placeholder:text-neutral-300 rounded-none transition-colors"
+            required
+          />
+          <p id="password-error" class="text-xs text-red-500 font-light hidden">
+            密碼不正確，請再試一次
+          </p>
+          <button 
+            type="submit" 
+            class="w-full bg-[#1A1A1A] hover:bg-neutral-800 text-white text-[10px] tracking-[0.2em] uppercase py-4 font-semibold transition-all duration-300 rounded-none cursor-pointer focus:outline-none"
+          >
+            Verify Password
+          </button>
+        </form>
+      </div>
+    </div>
+  )}
+
+  <div 
+    id="project-content" 
+    class="relative w-full min-h-screen flex flex-col md:flex-row bg-white overflow-x-hidden transition-all duration-500"
+  >
     
     <!-- Left: Image Gallery -->
     <div 
@@ -67,6 +109,20 @@ const { Content } = await render(project);
       <div class="description-content text-base font-normal text-neutral-600 leading-relaxed space-y-4 max-w-none">
         <Content />
       </div>
+
+      <!-- PDF Button -->
+      {project.data.pdf && (
+        <div class="mt-8 border-t border-neutral-100 pt-6">
+          <a 
+            href={`${import.meta.env.BASE_URL}${project.data.pdf.slice(1)}`}
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-block border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white text-[10px] tracking-[0.25em] uppercase px-6 py-3.5 font-semibold transition-all duration-300 rounded-none w-full text-center"
+          >
+            南鐵車道橋面過程發展
+          </a>
+        </div>
+      )}
 
       <!-- Back Button -->
       <div class="mt-auto pt-12">
@@ -199,6 +255,58 @@ const { Content } = await render(project);
 </style>
 
 <script>
+  // Password protection logic
+  const overlay = document.getElementById('password-overlay');
+  const form = document.getElementById('password-form') as HTMLFormElement | null;
+  const input = document.getElementById('project-password-input') as HTMLInputElement | null;
+  const errorMsg = document.getElementById('password-error');
+  const contentContainer = document.getElementById('project-content');
+  const projectIdEl = document.getElementById('project-id-data') as HTMLInputElement | null;
+  const projectPasswordEl = document.getElementById('project-password-data') as HTMLInputElement | null;
+
+  let isLocked = false;
+
+  if (projectIdEl && projectPasswordEl) {
+    const projectId = projectIdEl.value;
+    const correctPassword = projectPasswordEl.value;
+
+    if (correctPassword) {
+      const storageKey = `unlocked_project_${projectId}`;
+      
+      const unlock = () => {
+        isLocked = false;
+        overlay?.classList.add('opacity-0', 'pointer-events-none');
+        setTimeout(() => {
+          overlay?.remove();
+        }, 500);
+        contentContainer?.classList.remove('blur-md', 'opacity-10', 'pointer-events-none', 'select-none');
+      };
+
+      if (sessionStorage.getItem(storageKey) === 'true') {
+        unlock();
+      } else {
+        isLocked = true;
+        contentContainer?.classList.add('blur-md', 'opacity-10', 'pointer-events-none', 'select-none');
+        
+        form?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (input?.value === correctPassword) {
+            sessionStorage.setItem(storageKey, 'true');
+            unlock();
+          } else {
+            if (errorMsg) {
+              errorMsg.classList.remove('hidden');
+            }
+            if (input) {
+              input.value = '';
+              input.focus();
+            }
+          }
+        });
+      }
+    }
+  }
+
   const textPanel = document.getElementById('text-panel');
   const galleryContainer = document.getElementById('gallery-container');
   const closeBtn = document.getElementById('close-btn');
@@ -213,8 +321,11 @@ const { Content } = await render(project);
         // Mobile initial state: Panel hidden (translate-y-full), Info visible
         textPanel.classList.add('translate-y-full');
         textPanel.classList.remove('translate-y-0', 'md:translate-x-0', 'md:translate-x-full');
-        infoBtn.classList.remove('opacity-0', 'pointer-events-none');
-        infoBtn.classList.add('opacity-100', 'pointer-events-auto');
+        // Only show info button if page is not locked
+        if (!isLocked) {
+          infoBtn.classList.remove('opacity-0', 'pointer-events-none');
+          infoBtn.classList.add('opacity-100', 'pointer-events-auto');
+        }
         galleryContainer.classList.remove('md:w-2/3', 'md:w-full');
       } else {
         // Desktop initial state: Panel open (translate-x-0), Gallery 2/3 width, Info hidden
@@ -230,6 +341,17 @@ const { Content } = await render(project);
     // Run on init
     initLayout();
     window.addEventListener('resize', initLayout);
+
+    // If locked, we also hook into the submit listener to restore the info button if needed
+    if (form && isLocked) {
+      form.addEventListener('submit', () => {
+        if (sessionStorage.getItem(`unlocked_project_${projectIdEl?.value}`) === 'true') {
+          setTimeout(() => {
+            initLayout();
+          }, 600); // Wait for the transition to finish
+        }
+      });
+    }
 
     // Click Close Button
     closeBtn.addEventListener('click', () => {
