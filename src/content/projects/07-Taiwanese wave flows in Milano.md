@@ -14,5 +14,5 @@ images:
   - "../../assets/images/project-07/25.png"
   - "../../assets/images/project-07/26.png"
   - "../../assets/images/project-07/27.png"
-featured: false
+featured: true
 ---

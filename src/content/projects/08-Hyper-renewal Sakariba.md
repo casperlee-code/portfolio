@@ -12,5 +12,5 @@ images:
   - "../../assets/images/project-08/260802 web5@4x.png"
   - "../../assets/images/project-08/260802 web6@4x.png"
   - "../../assets/images/project-08/260802 web7@4x.png"
-featured: false
+featured: true
 ---
