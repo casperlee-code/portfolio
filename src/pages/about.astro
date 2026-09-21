@@ -3,75 +3,361 @@ import Layout from '../layouts/Layout.astro';
 import config from '../config.json';
 
 const getAssetPath = (path: string) => path.startsWith('/') ? `${import.meta.env.BASE_URL}${path.slice(1)}` : path;
+
+const educationGrades = [
+  { semester: '3rd Year, 2nd Semester', gpa: '4.0', deptRank: '1', classRank: '1', cumRank: '1' },
+  { semester: '3rd Year, 1st Semester', gpa: '3.9', deptRank: '3', classRank: '3', cumRank: '5' },
+  { semester: '2nd Year, 2nd Semester', gpa: '3.8', deptRank: '5', classRank: '2', cumRank: '7' },
+  { semester: '2nd Year, 1st Semester', gpa: '3.9', deptRank: '6', classRank: '3', cumRank: '11' },
+  { semester: '1st Year, 2nd Semester', gpa: '3.8', deptRank: '12', classRank: '4', cumRank: '11' },
+  { semester: '1st Year, 1st Semester', gpa: '3.5', deptRank: '10', classRank: '3', cumRank: '10' },
+];
+
+const awards = [
+  {
+    title: 'Merit Award',
+    competition: '2025 R.O.C. Student Design Competition, National Architect Association of R.O.C.',
+    date: 'Dec 2025'
+  },
+  {
+    title: 'Third Place',
+    competition: 'Distinguished Alumni Day × AI Book House 2026 Design Competition, Feng Chia University',
+    date: 'Jan 2026'
+  },
+  {
+    title: 'Third Place',
+    competition: 'Sophomore Design Critique, Feng Chia University',
+    date: 'Dec 2024 / Jun 2025'
+  }
+];
+
+const experiences = [
+  {
+    role: 'Architectural Intern',
+    company: 'SHIN Architects',
+    location: 'Tokyo, Japan',
+    date: 'Aug 2026',
+    highlights: [
+      'Contributed to the Takename Stadium grandstand project, focusing on large-span structural detailing.',
+      'Built a full-scale physical model to test construction methods and structural integration.',
+      'Immersed in Japanese design office culture and craftsmanship-driven workflow.'
+    ]
+  },
+  {
+    role: 'Architectural Intern',
+    company: 'STOA International Architects Inc.',
+    location: 'Houston, TX, USA',
+    date: 'Jul – Aug 2025',
+    highlights: [
+      'Conducted Revit modeling, Lumion rendering, and AutoCAD drafting for the Fort Bend County Community Center and KMST Center projects.',
+      'Gained insight into architectural scale, units, and design approaches within the U.S. urban context.'
+    ]
+  },
+  {
+    role: 'Architectural Intern',
+    company: 'AS.studio Engineering Consultant',
+    location: 'Tainan, Taiwan',
+    date: 'Jan – Feb 2026',
+    highlights: [
+      'Assisted in roof structure design for the Tainan Railway Green Corridor bicycle bridge, using Rhino for 3D modeling.',
+      'Produced physical structure models and presentation boards for the Chiayi City Library design competition.'
+    ]
+  },
+  {
+    role: 'Architectural Intern',
+    company: 'Harmony Design Architects',
+    location: 'Tainan, Taiwan',
+    date: 'Jan – Feb 2025',
+    highlights: [
+      'Assisted in model-making and design discussions for a residential project in Taichung.',
+      'Took part in preliminary site analysis for an elementary school gate guardhouse project.'
+    ]
+  },
+  {
+    role: 'Event Staff',
+    company: 'FIABCI International Trade Mission 2026',
+    location: 'Taichung, Taiwan',
+    date: 'Sep 2026',
+    highlights: [
+      'Supported guest reception and event logistics during international business matchmaking sessions and keynote presentations.',
+      'Gained first-hand exposure to how global real estate leaders exchange ideas.'
+    ]
+  },
+  {
+    role: 'Summer Workshop Student',
+    company: 'POLI.design, Politecnico di Milano',
+    location: 'Milan, Italy',
+    date: 'Jun – Jul 2026',
+    highlights: [
+      'Designed a pop-up retail concept for a Taiwanese brand inside Milano Centrale train station.',
+      'Explored transit-hub retail spatial efficiency and brand storytelling in a high-density commercial context.'
+    ]
+  },
+  {
+    role: 'Selected Participant',
+    company: 'MOE Overseas Elite Training Program (菁培計畫)',
+    location: 'Taiwan',
+    date: 'Jul 2026',
+    highlights: [
+      'Selected through a nationwide competitive review process for an intensive cross-disciplinary design training program.',
+      'Engaged in critique sessions with visiting professors and design professionals from overseas partner institutions.'
+    ]
+  },
+  {
+    role: 'Teaching Assistant (EMI Program)',
+    company: 'Feng Chia University',
+    location: 'Taichung, Taiwan',
+    date: 'Sep 2025 – Present',
+    highlights: [
+      'Supported sophomore design studio development and classroom activities.',
+      'Designed visual communication materials for FCU\'s Italian Week.'
+    ]
+  },
+  {
+    role: 'Assistant',
+    company: 'Golden Pin Design Award: Student Observer Program',
+    location: 'Taipei, Taiwan',
+    date: 'Sep 2025',
+    highlights: [
+      'Assisted in exhibition setup, gaining hands-on experience in spatial curation.',
+      'Observed the jury evaluation process during professional design assessment.'
+    ]
+  },
+  {
+    role: 'Deputy Director, Academic Division',
+    company: 'Architecture Student Association, Feng Chia University',
+    location: 'Taichung, Taiwan',
+    date: 'Aug 2025 – Present',
+    highlights: [
+      'Organizes architect lectures connecting students with practicing professionals.'
+    ]
+  },
+  {
+    role: 'Student',
+    company: 'AA Visiting School Taiwan — "Urbanity from the Ocean"',
+    location: 'Yilan / Hualien, Taiwan',
+    date: 'Aug 2024',
+    highlights: [
+      'Completed a 14-day field research and public exhibition program examining coastal ecological fragility through an indigenous cultural lens.'
+    ]
+  }
+];
+
+const skills = [
+  { category: 'Architectural Modeling', items: 'Revit, Rhinoceros, AutoCAD, Grasshopper' },
+  { category: 'Rendering', items: 'Lumion, D5 Render' },
+  { category: 'Adobe Software', items: 'Illustrator, Photoshop, InDesign, Premiere Pro' },
+  { category: 'Language Certificates', items: 'TOEFL iBT 92 | TOEIC 785 | BESTEP B2' }
+];
 ---
 
-<Layout title="About" description={`About ${config.name} — ${config.about.title}`}>
-  <div class="max-w-5xl mx-auto pt-36 pb-24 px-6 md:px-12 min-h-screen flex flex-col md:flex-row gap-12 md:gap-20">
+<Layout title="About" description={`About Casper Ping-Kuan Lee — Architectural Portfolio & Resume`}>
+  <div class="max-w-6xl mx-auto pt-32 md:pt-40 pb-24 px-6 md:px-12 min-h-screen flex flex-col md:flex-row gap-12 md:gap-16">
     
-    <!-- Left Column: Biography -->
-    <div class="md:w-3/5 space-y-8">
+    <!-- Left Main Column: Full CV Content -->
+    <div class="md:w-2/3 space-y-16">
+      
+      <!-- H1 Header & Subtitle -->
       <div>
-        <h1 class="text-xs tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-3">About</h1>
-        <h2 class="text-3xl md:text-4xl font-extralight tracking-tight font-display text-neutral-900 leading-tight">
-          {config.about.title}
-        </h2>
-      </div>
-      <div class="text-sm font-light leading-relaxed text-neutral-600 space-y-6">
-        <p>
-          {config.about.description}
+        <span class="text-xs tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-2 block">About</span>
+        <h1 class="text-3xl md:text-5xl font-light tracking-tight font-display text-neutral-900 leading-tight">
+          CASPER PING-KUAN LEE
+        </h1>
+        <p class="text-sm md:text-base font-light tracking-widest text-neutral-500 uppercase mt-2">
+          Taichung / Tainan, Taiwan
         </p>
       </div>
-    </div>
 
-    <!-- Right Column: Contact, Socials, CV -->
-    <div class="md:w-2/5 space-y-12 md:border-l md:border-neutral-100 md:pl-12">
-      <!-- Contact Info -->
-      <div class="space-y-4">
-        <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold">Contact</h3>
-        <div class="space-y-2 text-sm font-light text-neutral-800">
-          <p>
-            <span class="text-neutral-400 block text-[10px] tracking-widest uppercase mb-1">Email</span>
-            <a href={`mailto:${config.about.email}`} class="hover:text-neutral-500 transition-colors duration-300">
-              {config.about.email}
-            </a>
-          </p>
-          <p class="pt-2">
-            <span class="text-neutral-400 block text-[10px] tracking-widest uppercase mb-1">Phone</span>
-            <a href={`tel:${config.about.phone}`} class="hover:text-neutral-500 transition-colors duration-300">
-              {config.about.phone}
-            </a>
-          </p>
+      <!-- ## SUMMARY -->
+      <section class="space-y-4">
+        <h2 class="text-xs tracking-[0.25em] uppercase font-bold text-neutral-900 border-b border-neutral-200 pb-2 font-display">
+          SUMMARY
+        </h2>
+        <p class="text-sm font-light leading-relaxed text-neutral-700">
+          Fourth-year architecture student passionate about the intersection of architecture, computation, and international real estate development. Skilled in Revit, Rhino, Grasshopper, and BIM workflows developed across internships in three countries, with hands-on experience translating design concepts into buildable, resource-efficient outcomes. Brings integrated technical and cross-cultural skills strengthened through internships and study programs in the United States, Japan, Italy, and Taiwan.
+        </p>
+      </section>
+
+      <!-- ## EDUCATION -->
+      <section class="space-y-6">
+        <h2 class="text-xs tracking-[0.25em] uppercase font-bold text-neutral-900 border-b border-neutral-200 pb-2 font-display">
+          EDUCATION
+        </h2>
+        <div class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            <h3 class="text-base font-medium text-neutral-900 font-display">
+              Feng Chia University, Bachelor of Architecture Studies
+            </h3>
+            <span class="text-xs text-neutral-400 font-light whitespace-nowrap">Sep 2023 – Present</span>
+          </div>
+
+          <!-- Highlight Achievement -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 text-xs text-neutral-800 font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+            Ranked 1st of 106 students, Department of Architecture
+          </div>
+
+          <!-- Grades & Rankings Table -->
+          <div class="pt-2">
+            <p class="text-[11px] tracking-wider uppercase text-neutral-400 font-semibold mb-3">
+              Academic Record (GPA & Ranking Breakdown)
+            </p>
+            <div class="overflow-x-auto border border-neutral-100">
+              <table class="w-full text-left text-xs font-light">
+                <thead>
+                  <tr class="bg-neutral-50 text-neutral-500 border-b border-neutral-100 text-[10px] tracking-widest uppercase">
+                    <th class="py-2.5 px-3">Semester</th>
+                    <th class="py-2.5 px-3">GPA</th>
+                    <th class="py-2.5 px-3">Dept Rank</th>
+                    <th class="py-2.5 px-3">Class Rank</th>
+                    <th class="py-2.5 px-3">Cumulative Dept Rank</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-100 text-neutral-700">
+                  {educationGrades.map((row) => (
+                    <tr class="hover:bg-neutral-50/50 transition-colors">
+                      <td class="py-2.5 px-3 font-medium text-neutral-900">{row.semester}</td>
+                      <td class="py-2.5 px-3">{row.gpa}</td>
+                      <td class="py-2.5 px-3">{row.deptRank}</td>
+                      <td class="py-2.5 px-3">{row.classRank}</td>
+                      <td class="py-2.5 px-3">{row.cumRank}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Socials -->
-      <div class="space-y-4">
-        <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold">Socials</h3>
-        <div class="flex flex-col gap-2">
-          {config.socials.map((social) => (
-            <a 
-              href={social.url} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="text-sm font-light text-neutral-800 hover:text-neutral-500 transition-colors duration-300 w-fit"
-            >
-              {social.name}
-            </a>
+      <!-- ## AWARDS & COMPETITIONS -->
+      <section class="space-y-6">
+        <h2 class="text-xs tracking-[0.25em] uppercase font-bold text-neutral-900 border-b border-neutral-200 pb-2 font-display">
+          AWARDS & COMPETITIONS
+        </h2>
+        <div class="space-y-4">
+          {awards.map((award) => (
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-1 border-l-2 border-neutral-200 pl-4 py-0.5">
+              <div>
+                <span class="text-xs font-semibold tracking-wider text-neutral-900 uppercase block font-display">
+                  {award.title}
+                </span>
+                <p class="text-xs text-neutral-600 font-light mt-0.5">
+                  {award.competition}
+                </p>
+              </div>
+              <span class="text-xs text-neutral-400 font-light whitespace-nowrap sm:text-right">
+                {award.date}
+              </span>
+            </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <!-- CV Download -->
-      <div class="pt-4">
-        <a 
-          href={getAssetPath(config.about.cvUrl)} 
-          download
-          class="inline-block border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white text-[10px] tracking-[0.25em] uppercase px-8 py-4 font-semibold transition-all duration-300 rounded-none w-full text-center md:w-auto"
-        >
-          Download CV
-        </a>
-      </div>
+      <!-- ## PROFESSIONAL EXPERIENCE -->
+      <section class="space-y-8">
+        <h2 class="text-xs tracking-[0.25em] uppercase font-bold text-neutral-900 border-b border-neutral-200 pb-2 font-display">
+          PROFESSIONAL EXPERIENCE
+        </h2>
+        <div class="space-y-8">
+          {experiences.map((exp) => (
+            <div class="space-y-2">
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                <h3 class="text-sm font-semibold text-neutral-900 font-display">
+                  {exp.role} <span class="font-light text-neutral-400 mx-1.5">|</span> {exp.company}
+                </h3>
+                <span class="text-xs text-neutral-400 font-light whitespace-nowrap">
+                  {exp.date}
+                </span>
+              </div>
+              <p class="text-xs text-neutral-500 font-light tracking-wide uppercase">
+                {exp.location}
+              </p>
+              <ul class="space-y-1.5 pt-1 text-xs text-neutral-600 font-light list-disc list-inside">
+                {exp.highlights.map((item) => (
+                  <li class="leading-relaxed pl-1">
+                    <span class="-ml-1">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
+      <!-- ## SKILLS -->
+      <section class="space-y-6">
+        <h2 class="text-xs tracking-[0.25em] uppercase font-bold text-neutral-900 border-b border-neutral-200 pb-2 font-display">
+          SKILLS
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {skills.map((skill) => (
+            <div class="p-4 border border-neutral-100 bg-neutral-50/50 space-y-1">
+              <h3 class="text-[11px] tracking-wider uppercase font-semibold text-neutral-400 font-display">
+                {skill.category}
+              </h3>
+              <p class="text-xs font-light text-neutral-800">
+                {skill.items}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Right Column: Sidebar (Contact, Socials, CV Download) -->
+    <div class="md:w-1/3">
+      <div class="sticky top-28 space-y-10 md:border-l md:border-neutral-100 md:pl-10">
+        
+        <!-- Contact Info -->
+        <div class="space-y-3">
+          <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold font-display">Contact</h3>
+          <div class="space-y-3 text-xs font-light text-neutral-800">
+            <div>
+              <span class="text-neutral-400 block text-[9px] tracking-widest uppercase mb-0.5">Email</span>
+              <a href={`mailto:${config.about.email}`} class="hover:text-neutral-500 transition-colors duration-300">
+                {config.about.email}
+              </a>
+            </div>
+            <div>
+              <span class="text-neutral-400 block text-[9px] tracking-widest uppercase mb-0.5">Phone</span>
+              <a href={`tel:${config.about.phone}`} class="hover:text-neutral-500 transition-colors duration-300">
+                {config.about.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Socials -->
+        <div class="space-y-3">
+          <h3 class="text-[10px] tracking-[0.2em] uppercase text-neutral-400 font-semibold font-display">Socials</h3>
+          <div class="flex flex-col gap-2">
+            {config.socials.map((social) => (
+              <a 
+                href={social.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-xs font-light text-neutral-800 hover:text-neutral-500 transition-colors duration-300 w-fit"
+              >
+                {social.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- CV Download -->
+        <div class="pt-2">
+          <a 
+            href={getAssetPath(config.about.cvUrl)} 
+            download
+            class="inline-block border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white text-[10px] tracking-[0.25em] uppercase px-6 py-3.5 font-semibold transition-all duration-300 rounded-none w-full text-center"
+          >
+            Download CV (PDF)
+          </a>
+        </div>
+
+      </div>
     </div>
 
   </div>
