@@ -157,15 +157,8 @@ const skills = [
     <!-- Left Main Column: Full CV Content -->
     <div class="md:w-2/3 space-y-16">
       
-      <!-- Profile Photo & H1 Header -->
+      <!-- H1 Header & Profile Photo -->
       <div class="space-y-6">
-        <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100">
-          <img 
-            src={getAssetPath('/大頭照.jpg')} 
-            alt="Casper Ping-Kuan Lee" 
-            class="w-full h-full object-cover"
-          />
-        </div>
         <div>
           <span class="text-xs tracking-[0.25em] uppercase text-neutral-400 font-semibold mb-2 block">About</span>
           <h1 class="text-3xl md:text-5xl font-light tracking-tight font-display text-neutral-900 leading-tight">
@@ -174,6 +167,15 @@ const skills = [
           <p class="text-sm md:text-base font-light tracking-widest text-neutral-500 uppercase mt-2">
             Taichung / Tainan, Taiwan
           </p>
+        </div>
+        
+        <!-- Square Profile Photo below location -->
+        <div class="w-40 h-40 md:w-48 md:h-48 aspect-square overflow-hidden border border-neutral-200 shadow-sm bg-neutral-100">
+          <img 
+            src={getAssetPath('/大頭照.jpg')} 
+            alt="Casper Ping-Kuan Lee" 
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
 
