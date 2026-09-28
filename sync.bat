@@ -32,7 +32,9 @@ if exist .git rmdir /s /q .git
 git init
 git config user.name "Casper Lee"
 git config user.email "Casper.lee.family@gmail.com"
+copy nul .nojekyll > nul
 git add .
+git add -f .nojekyll
 git commit -m "Deploy: rebuild portfolio"
 git remote add origin https://github.com/casperlee-code/portfolio.git
 git push origin HEAD:gh-pages --force
