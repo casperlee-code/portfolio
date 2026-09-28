@@ -7,6 +7,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://casperlee-code.github.io',
   base: '/portfolio/',
+  build: {
+    assets: 'assets'
+  },
   vite: {
     plugins: [tailwindcss()]
   }
